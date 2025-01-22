@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Alert Notification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #004b8d;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        header img {
+            max-height: 50px;
+            vertical-align: middle;
+        }
+        header h1 {
+            display: inline-block;
+            margin: 0;
+            padding-left: 10px;
+            vertical-align: middle;
+            font-size: 24px;
+        }
+        .container {
+            background: white;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            background: #f9f9f9;
+            margin: 5px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #28a745;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        button a {
+            color: white;
+            text-decoration: none;
+        }
+        button a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <img src="https://www.360connect.com/wp-content/uploads/2021/01/shutterstock_1770222968-1024x512.jpg" alt="Fleet Management System Logo">
+    <h1>Fleet Management System</h1>
+</header>
+<div class="container">
+    <h2>Alert Notification</h2>
+    <p>Dear User,</p>
+    <p>The following alerts have been generated for the vehicle:</p>
+    <ul>
+        <li th:each="entry : ${alerts}" th:text="${entry.key} + ' - ' + ${entry.value}"></li>
+    </ul>
+    <p>
+        <strong>License Plate:</strong> <span th:text="${licensePlate}"></span><br>
+        <strong>Date:</strong> <span th:text="${date}"></span>
+    </p>
+    <button>
+        <a th:href="'https://www.google.com/maps?q=' + ${latitude} + ',' + ${longitude}" target="_blank">
+            TAP HERE TO REDIRECT TO LOCATION IN MAP
+        </a>
+    </button>
+</div>
+<footer>
+    Stay safe,<br>Fleet Management System
+</footer>
+</body>
+</html>

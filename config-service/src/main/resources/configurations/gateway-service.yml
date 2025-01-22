@@ -1,0 +1,63 @@
+server:
+  port: 8222
+
+spring:
+
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "http://localhost:5173"  # Specify the frontend address explicitly
+            allowedHeaders:
+              - "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+            allowCredentials: true  # If cookies or auth headers are needed
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: vehicle-service
+          uri: lb:http://VEHICLE-SERVICE
+          predicates:
+            - Path=/api/v1/vehicles/**
+        - id: tracker-service
+          uri: lb:http://TRACKER-SERVICE
+          predicates:
+            - Path=/api/v1/trackers/**
+        - id: driver-service
+          uri: lb:http://DRIVER-SERVICE
+          predicates:
+            - Path=/api/v1/drivers/**
+        - id: position-service
+          uri: lb:http://POSITION-SERVICE
+          predicates:
+            - Path=/api/v1/positions/**
+        - id: minio-service
+          uri: lb:http://MINIO-SERVICE
+          predicates:
+            - Path=/minio/**
+        - id: user-service
+          uri: lb:http://USER-SERVICE
+          predicates:
+            - Path=/api/userextras/**
+jwt:
+  auth:
+    converter:
+      resource-id: fleet-management-system
+      principal-attribute: preferred_username
+
+app:
+  cors:
+    allowed-origins: http://localhost:5173
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty: DEBUG
+    org.springframework.web: DEBUG

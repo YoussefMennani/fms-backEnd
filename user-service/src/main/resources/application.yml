@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: user-service
+  config:
+    import: optional:configserver:http://localhost:8888
+
+#keycloak:
+#  auth-server-url: http://localhost:9090/realms/fleet-management-system
+#  realm: fleet-management-system
+#  client-id: listener-client
+#  client-secret: NIqu6THXwIVhiIRhUQjlblDUkXRVYzUu
+#  grant-type: client_credentials
+#  public-client: false
+#  use-resource-role-mappings: true
+#  bearer-only: true
+#  security-constraints:
+#    - auth-roles:
+#        - "user"
+#      security-roles:
+#        - "admin"

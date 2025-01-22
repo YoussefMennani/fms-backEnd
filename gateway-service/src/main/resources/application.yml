@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: gateway-service
+  config:
+    import: optional:configserver:http://localhost:8888
+
+  main:
+    allow-bean-definition-overriding: true
+    web-application-type: reactive
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/fleet-management-system
+          jwk-set-uri: http://localhost:9090/realms/fleet-management-system/protocol/openid-connect/certs
