@@ -1,0 +1,36 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/GeoPositionDB
+      mapping:
+        type-key: null
+
+
+  kafka:
+    bootstrap-servers: 62.171.166.135:9092  # Replace with your Kafka broker's IP or hostname
+
+    consumer:
+      group-id: gps-consumer-group  # Consumer group ID
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      auto-offset-reset: earliest  # Start consuming from the earliest offset if no previous offset exists
+
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.type.mapping: position:com.fleetManagementSystem.commons.position.model.Position
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761/eureka}
+
+
+keycloak:
+  token-uri: http://localhost:9090/realms/fleet-management-system/protocol/openid-connect/token
+  client-id: listener-client
+  client-secret: NIqu6THXwIVhiIRhUQjlblDUkXRVYzUu
+
+server:
+  port: 8092

@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: mqtt-subscriber-service
+  config:
+    import: optional:configserver:http://localhost:8888
+
+
+security:
+  oauth2:
+    token-uri: http://localhost:9090/realms/fleet-management-system/protocol/openid-connect/token
+    client-id: fms
+    username: admin@mail.com
+    password: admin
+

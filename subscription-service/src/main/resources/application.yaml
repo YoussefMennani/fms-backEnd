@@ -1,0 +1,10 @@
+#spring.application.name=subscription-service
+spring:
+  application:
+    name: subscription-service
+  config:
+    import: optional:configserver:http://localhost:8888
+
+stripe:
+  api:
+    secret-key: xxxxxxxxxxxx

@@ -1,0 +1,16 @@
+spring:
+  kafka:
+#    bootstrap-servers: ${KAFKA_BROKER_URL:localhost:9092}
+
+    bootstrap-servers: ${KAFKA_BROKER_URL:62.171.166.135:9092}  # Change to Kafka broker URL from Docker (use the proper external IP or localhost)
+    consumer:
+      group-id: position-group
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    listener:
+      missing-topics-fatal: false  # Do not fail if topic doesn't exist at startup
+server:
+  port: 8099

@@ -1,0 +1,73 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.3.5</version>
+    <relativePath/>
+  </parent>
+
+
+  <groupId>com.fleetManagementSystem</groupId>
+  <artifactId>fleet-management-system</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <name>Archetype - fleet-management-system</name>
+  <url>http://maven.apache.org</url>
+  <packaging>pom</packaging>
+
+
+  <modules>
+    <module>config-service</module>
+    <module>discovery-service</module>
+    <module>commons</module>
+    <module>user-service</module>
+    <module>vehicles-service</module>
+    <module>vehicle-notification-service</module>
+    <module>tracker-service</module>
+    <module>kafka-service</module>
+    <module>simulateurGPS</module>
+<!--    <module>ListnerJava</module>-->
+    <module>position-service</module>
+    <module>alert-service</module>
+<!--    <module>listner-service</module>-->
+    <module>driver-service</module>
+    <module>minio-service</module>
+    <module>gateway-service</module>
+    <module>reelListner-service</module>
+    <module>anomaly-detection-service</module>
+    <module>mqtt-subscriber-service</module>
+    <module>subscription-service</module>
+  </modules>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>2023.0.3</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.fleetManagementSystem</groupId>
+        <artifactId>commons</artifactId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+</project>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <excludeFromCompile>
+      <directory url="file://$PROJECT_DIR$/src/main/resources/archetype-resources" includeSubdirectories="true" />
+    </excludeFromCompile>
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="simulateurGPS (2)" />
+        <module name="config-service" />
+        <module name="subscription-service" />
+        <module name="alert-service" />
+        <module name="kafka-service" />
+        <module name="simulateurGPS" />
+        <module name="position-service" />
+        <module name="reelListner-service" />
+        <module name="tracker-service" />
+        <module name="user-service" />
+        <module name="vehicles-service" />
+        <module name="vehicle-notification-service" />
+        <module name="discovery-service" />
+        <module name="commons" />
+        <module name="minio-service" />
+        <module name="agentAI" />
+        <module name="anomaly-detection-service" />
+        <module name="gateway-service" />
+        <module name="listner-service" />
+        <module name="mqtt-subscriber-service" />
+        <module name="driver-service" />
+      </profile>
+      <profile name="Annotation profile for chatbot-rag" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+        </processorPath>
+        <module name="chatbot-rag" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ListnerJava" target="17" />
+      <module name="vehicle-service" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ListnerJava" options="-parameters" />
+      <module name="agentAI" options="-parameters" />
+      <module name="alert-service" options="-parameters" />
+      <module name="anomaly-detection-service" options="-parameters" />
+      <module name="chatbot-rag" options="-parameters" />
+      <module name="commons" options="-parameters" />
+      <module name="config-service" options="-parameters" />
+      <module name="discovery-service" options="-parameters" />
+      <module name="driver-service" options="-parameters" />
+      <module name="gateway-service" options="-parameters" />
+      <module name="kafka-service" options="-parameters" />
+      <module name="listner-service" options="-parameters" />
+      <module name="minio-service" options="-parameters" />
+      <module name="mqtt-subscriber-service" options="-parameters" />
+      <module name="position-service" options="-parameters" />
+      <module name="reelListner-service" options="-parameters" />
+      <module name="simulateurGPS" options="-parameters" />
+      <module name="subscription-service" options="-parameters" />
+      <module name="tracker-service" options="-parameters" />
+      <module name="user-service" options="-parameters" />
+      <module name="vehicle-notification-service" options="-parameters" />
+      <module name="vehicle-service" options="-parameters" />
+      <module name="vehicles-service" options="-parameters" />
+    </option>
+  </component>
+</project>

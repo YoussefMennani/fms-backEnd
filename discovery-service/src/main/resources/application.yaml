@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: discovery-service
+  config:
+    import: optional:configserver:${CONFIG_SERVICE_URL:http://localhost:8888}
+#server:
+#  port: 6666
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

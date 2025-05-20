@@ -1,0 +1,8 @@
+server:
+  port: 9002
+
+minio:
+  endpoint: http://localhost:9000
+  access-key: K5RdSU9LBiMJ1LHQMU0q
+  secret-key: dmViO804ZsDyhOQ1lCIOp6zf2TECTFQha8FdNokf
+  bucket-name: geo-app-bucket
