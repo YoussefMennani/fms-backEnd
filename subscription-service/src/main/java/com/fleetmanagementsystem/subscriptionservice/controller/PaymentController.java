@@ -4,48 +4,33 @@ import com.fleetManagementSystem.commons.subscription.dto.PaymentRequest;
 import com.fleetManagementSystem.commons.subscription.enums.PaymentMethod;
 import com.fleetManagementSystem.commons.subscription.enums.PaymentStatus;
 import com.fleetManagementSystem.commons.subscription.model.Payment;
-import com.fleetmanagementsystem.subscriptionservice.service.PaymentService;
+import com.fleetmanagementsystem.subscriptionservice.service.StripeApiPaymentGateway;
 import com.stripe.exception.StripeException;
-import com.stripe.model.checkout.Session;
-import com.stripe.param.checkout.SessionCreateParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-// 5. PaymentController.java
 @RestController
 @RequestMapping("/api/v1/payment")
 public class PaymentController {
 
     @Autowired
-    private PaymentService paymentService;
+    private StripeApiPaymentGateway paymentService;
 
-
-
-
-    @PostMapping("/create-checkout-session")
-    public ResponseEntity<Payment> createCheckoutSession(@RequestBody PaymentRequest paymentRequest) throws StripeException {
-        Payment payment  = Payment.builder()
+    @PostMapping("/process")
+    public ResponseEntity<Payment> processPayment(@RequestBody PaymentRequest paymentRequest) throws StripeException {
+        Payment payment = Payment.builder()
                 .amount(paymentRequest.getAmount())
                 .paymentMethod(PaymentMethod.STRIPE)
                 .status(PaymentStatus.PENDING)
                 .userMinimal(null)
+                .subscriptionId(paymentRequest.getSubscriptionId())
                 .build();
-        Payment paymentResponse = paymentService.makePayment(payment);
+
+        Payment paymentResponse = paymentService.processPaymentWithPaymentMethod(
+                payment,
+                paymentRequest.getPaymentMethodId()
+        );
         return ResponseEntity.ok(paymentResponse);
     }
-
-//    @GetMapping("/success")
-//    public String getSuccess(){
-//        return "payment successful";
-//    }
-//
-//    @GetMapping("/cancel")
-//    public String cancel(){
-//        return "payment canceled";
-//    }
 }

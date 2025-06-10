@@ -25,7 +25,7 @@ public class UserExtra {
     private String firstName;
     private String lastName;
     private String email;
-
+    private String phoneNumber;
     private String avatar;
     @DBRef(lazy = true)
     private Profile profile;

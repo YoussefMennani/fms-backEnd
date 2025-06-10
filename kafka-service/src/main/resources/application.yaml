@@ -2,7 +2,7 @@ spring:
   kafka:
 #    bootstrap-servers: ${KAFKA_BROKER_URL:localhost:9092}
 
-    bootstrap-servers: ${KAFKA_BROKER_URL:62.171.166.135:9092}  # Change to Kafka broker URL from Docker (use the proper external IP or localhost)
+    bootstrap-servers: ${KAFKA_BROKER_URL:45.10.162.39:9092}  # Change to Kafka broker URL from Docker (use the proper external IP or localhost)
     consumer:
       group-id: position-group
       auto-offset-reset: earliest

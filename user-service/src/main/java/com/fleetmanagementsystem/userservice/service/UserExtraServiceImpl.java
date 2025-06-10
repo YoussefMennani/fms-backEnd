@@ -1,6 +1,7 @@
 package com.fleetmanagementsystem.userservice.service;
 
 import com.fleetManagementSystem.commons.user.UserMinimal;
+import com.fleetManagementSystem.commons.user.UserResponse;
 import com.fleetmanagementsystem.userservice.Model.Profile;
 import com.fleetmanagementsystem.userservice.Model.UserExtra;
 import com.fleetmanagementsystem.userservice.controller.dto.UserRequest;
@@ -119,6 +120,28 @@ public class UserExtraServiceImpl implements UserExtraService {
     @Override
     public List<UserMinimal> getUsersFromList(List<String> usersList) {
         return userExtraRepository.findByIdIn(usersList);
+    }
+
+    @Override
+    public UserResponse updateAccountDetailsUser(String username, UserResponse userResponse) {
+        try {
+            UserExtra userExtra = getUserExtra(username)
+                        .orElseThrow(() -> new UserExtraNotFoundException(username));
+
+            userExtra.setUsername(userResponse.getUsername());
+            userExtra.setAvatar(userResponse.getAvatar());
+            userExtra.setEmail(userResponse.getEmail());
+            userExtra.setLastName(userResponse.getLastName());
+            userExtra.setFirstName(userResponse.getFirstName());
+            userExtra.setPhoneNumber(userResponse.getPhoneNumber());
+
+            userExtraRepository.save(userExtra);
+            return userResponse;
+        } catch (UserExtraNotFoundException ex) {
+            // Log additional details
+            System.out.println("UserExtra not found for username: {}");
+            throw ex; // Re-throw if needed
+        }
     }
 
     public UserExtra createUser(UserRequest userRequest) {

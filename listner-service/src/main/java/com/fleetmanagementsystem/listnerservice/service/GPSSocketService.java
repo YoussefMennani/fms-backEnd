@@ -126,7 +126,7 @@ public class GPSSocketService {
                                     .firstName(vehicle.getCurrentDriver().getFirstName())
                                     .lastName(vehicle.getCurrentDriver().getLastName())
                                     .phoneNumber(vehicle.getCurrentDriver().getPhoneNumber())
-                                    .organization(vehicle.getCurrentDriver().getOrganization())
+                                    .organization(vehicle.getOrganization().getName())
                                     .build();
                             position.setDriver(minimalDriver);
                         }else{

@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface PaymentRepository extends MongoRepository<Payment,String> {
 
-    List<Payment> findPaymentsBySubscription(String subscriptionId);
+    List<Payment> findPaymentsBySubscriptionId(String subscriptionId);
 }

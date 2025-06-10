@@ -4,7 +4,7 @@ server:
 spring:
 
   kafka:
-    bootstrap-servers: 62.171.166.135:9092
+    bootstrap-servers: 45.10.162.39:9092
     consumer:
       group-id: alert-service-group
       auto-offset-reset: earliest

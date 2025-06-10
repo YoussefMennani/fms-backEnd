@@ -1,12 +1,21 @@
 package com.fleetManagementSystem.commons.subscription.dto;
 
-import lombok.Data;
+import com.fleetManagementSystem.commons.subscription.model.CardDetails;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class PaymentRequest {
-    private String productName;
-    private BigDecimal amount;
-    // Getters and Setters
+    private Long amount;
+    private String paymentMethodId;
+    private String subscriptionId;
+
+
 }

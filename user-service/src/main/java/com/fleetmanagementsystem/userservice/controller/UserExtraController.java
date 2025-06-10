@@ -2,6 +2,7 @@ package com.fleetmanagementsystem.userservice.controller;
 
 
 import com.fleetManagementSystem.commons.user.UserMinimal;
+import com.fleetManagementSystem.commons.user.UserResponse;
 import com.fleetmanagementsystem.userservice.FeignClient.SubscriptionClient;
 import com.fleetmanagementsystem.userservice.Model.Menu;
 import com.fleetmanagementsystem.userservice.Model.Profile;
@@ -81,6 +82,53 @@ public class UserExtraController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+
+    @GetMapping("/getAccountInfo")
+    public ResponseEntity<UserResponse> getAccountInfo(Principal principal) {
+        try {
+            // Validate and get user details
+            UserExtra userExtra = userExtraService.validateAndGetUserExtra(principal.getName(), principal);
+            UserResponse userResponse = UserResponse.builder()
+            .id(userExtra.getId())
+            .username(userExtra.getUsername())
+            .firstName(userExtra.getFirstName())
+            .lastName(userExtra.getLastName())
+            .email(userExtra.getEmail())
+            .avatar(userExtra.getAvatar())
+            .profileName(userExtra.getProfile().getName())
+            .profileRole(userExtra.getProfile().getRole())
+            .organizationName(userExtra.getOrganization().getName())
+            .phoneNumber(userExtra.getPhoneNumber())
+            .build();
+            // Check if the user is a super admin
+            return ResponseEntity.ok(userResponse);
+        } catch (AccessDeniedException e) {
+            // Handle unauthorized access
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        } catch (Exception e) {
+            // Handle other exceptions
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @PostMapping("/updateProfileInfo")
+    public ResponseEntity<UserResponse> updateProfileInfo(Principal principal,@RequestBody UserResponse userResponse) {
+        try {
+            // Validate and get user details
+            UserResponse userResp =  userExtraService.updateAccountDetailsUser(principal.getName(), userResponse);
+
+            // Check if the user is a super admin
+            return ResponseEntity.ok(userResp);
+        } catch (AccessDeniedException e) {
+            // Handle unauthorized access
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        } catch (Exception e) {
+            // Handle other exceptions
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
 
     //    @Operation(security = {@SecurityRequirement(name = BEARER_KEY_SECURITY_SCHEME)})
     @PostMapping("/me")

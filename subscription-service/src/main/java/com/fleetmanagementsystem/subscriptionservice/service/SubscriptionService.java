@@ -1,20 +1,19 @@
 package com.fleetmanagementsystem.subscriptionservice.service;
 
 import com.fleetManagementSystem.commons.exception.PlanNotFoundException;
-import com.fleetManagementSystem.commons.organization.Organization;
 import com.fleetManagementSystem.commons.subscription.dto.SubscriptionResponse;
+import com.fleetManagementSystem.commons.subscription.enums.PaymentStatus;
 import com.fleetManagementSystem.commons.subscription.model.Payment;
-import com.fleetManagementSystem.commons.subscription.model.Plan;
 import com.fleetManagementSystem.commons.subscription.model.Subscription;
 
 import com.fleetmanagementsystem.subscriptionservice.repository.PaymentRepository;
-import com.fleetmanagementsystem.subscriptionservice.repository.PlanRepository;
 import com.fleetmanagementsystem.subscriptionservice.repository.SubscriptionRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,7 +41,7 @@ public class SubscriptionService {
         List<Subscription> subscriptionsByOrganization = subscriptionRepository.findSubscriptionsByOrganization(orgId);
         List<SubscriptionResponse> subscriptionResponseList =  new ArrayList<>();
         for (Subscription subscription: subscriptionsByOrganization) {
-            List<Payment> paymentList = paymentRepository.findPaymentsBySubscription(subscription.getId());
+            List<Payment> paymentList = paymentRepository.findPaymentsBySubscriptionId(subscription.getId());
 
             SubscriptionResponse subscriptionResponse = SubscriptionResponse.builder()
                     .id(subscription.getId())
@@ -116,18 +115,19 @@ public class SubscriptionService {
 
     public boolean isOrganizationAuthorized(String organizationId) {
         // Fetch the subscription by organization ID
-        Subscription subscription = subscriptionRepository.findByOrganizationId(organizationId);
+//        Subscription subscription = subscriptionRepository.findByOrganizationId(organizationId);
 
+        Date now = new Date();
+        Subscription subscription =  subscriptionRepository.findActiveSubscription(organizationId, now);
         if (subscription == null) {
             return false; // No subscription found for the organization
         }
 
-        LocalDateTime now = LocalDateTime.now();
+        List<Payment> paymentDetails = paymentRepository.findPaymentsBySubscriptionId(subscription.getId());
+
 
         // Check if the subscription is enabled and the current date is within the start and end date
-        return subscription.isEnabled() &&
-                now.isAfter(subscription.getStartDate()) &&
-                now.isBefore(subscription.getEndDate());
+        return subscription.isEnabled() ||  (paymentDetails.size() >0 && paymentDetails.get(0).getStatus() == PaymentStatus.CONFIRMED);
     }
 
 }

@@ -7,7 +7,7 @@ spring:
 
 
   kafka:
-    bootstrap-servers: 62.171.166.135:9092  # Replace with your Kafka broker's IP or hostname
+    bootstrap-servers: 45.10.162.39:9092  # Replace with your Kafka broker's IP or hostname
 
     consumer:
       group-id: gps-consumer-group  # Consumer group ID

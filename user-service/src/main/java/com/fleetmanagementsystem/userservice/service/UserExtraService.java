@@ -2,11 +2,13 @@ package com.fleetmanagementsystem.userservice.service;
 
 
 import com.fleetManagementSystem.commons.user.UserMinimal;
+import com.fleetManagementSystem.commons.user.UserResponse;
 import com.fleetmanagementsystem.userservice.Model.UserExtra;
 import com.fleetmanagementsystem.userservice.controller.dto.UserRequest;
 import com.fleetmanagementsystem.userservice.organization.Organization;
 import org.bson.types.ObjectId;
 
+import javax.net.ssl.SSLSession;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
@@ -30,4 +32,6 @@ public interface UserExtraService {
     List<UserMinimal> getUsersByOrgs(List<ObjectId> stringListOrg);
 
     List<UserMinimal> getUsersFromList(List<String> usersList);
+
+    UserResponse updateAccountDetailsUser(String name, UserResponse userResponse);
 }
