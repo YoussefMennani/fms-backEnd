@@ -7,24 +7,22 @@
 FROM maven:3.9.4-eclipse-temurin-17 AS builder
 WORKDIR /app
 
-# Copy only the Maven project file first and resolve dependencies
-COPY pom.xml .
-RUN mvn dependency:go-offline
-
-# Copy the rest of the source code
+# Copy all files (including parent and modules)
 COPY . .
 
-# Package the app
-RUN mvn clean package -DskipTests
+# Download dependencies (go offline) for the whole project
+RUN mvn dependency:go-offline
+
+# Package the app (replace 'config-service' with your module name if needed)
+RUN mvn clean package -DskipTests -pl config-service -am
 
 # -------- Stage 2: Run the packaged app with OpenJDK --------
 FROM openjdk:17-oracle
 VOLUME /tmp
 WORKDIR /app
 
-# Copy the packaged jar from the builder image
-COPY --from=builder /app/target/*.jar app.jar
+# Copy the jar of the module from the builder
+COPY --from=builder /app/config-service/target/*.jar app.jar
 
 # Run the app
 ENTRYPOINT ["java", "-jar", "app.jar"]
-

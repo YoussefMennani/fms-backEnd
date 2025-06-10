@@ -6,6 +6,8 @@
 		<artifactId>fleet-management-system</artifactId>
 		<groupId>com.fleetManagementSystem</groupId>
 		<version>1.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath> <!-- adjust if needed -->
+
 	</parent>
 
 	<groupId>com.fleetManagementSystem</groupId>
