@@ -28,7 +28,7 @@
     <module>vehicle-notification-service</module>
     <module>tracker-service</module>
     <module>kafka-service</module>
-    <module>simulateurGPS</module>
+<!--    <module>simulateurGPS</module>-->
 <!--    <module>ListnerJava</module>-->
     <module>position-service</module>
     <module>alert-service</module>
@@ -36,9 +36,9 @@
     <module>driver-service</module>
     <module>minio-service</module>
     <module>gateway-service</module>
-    <module>reelListner-service</module>
+<!--    <module>reelListner-service</module>-->
     <module>anomaly-detection-service</module>
-    <module>mqtt-subscriber-service</module>
+<!--    <module>mqtt-subscriber-service</module>-->
     <module>subscription-service</module>
   </modules>
 

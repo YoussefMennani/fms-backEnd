@@ -68,7 +68,7 @@ public class TrackerService {
                 .firstName(vehicle.getCurrentDriver().getFirstName())
                 .lastName(vehicle.getCurrentDriver().getLastName())
                 .phoneNumber(vehicle.getCurrentDriver().getPhoneNumber())
-                .organization(vehicle.getCurrentDriver().getOrganization())
+                .organization(vehicle.getCurrentDriver().getOrganization().getName())
                 .build();
 
         position.setDriver(minimalDriver);

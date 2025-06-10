@@ -3,6 +3,8 @@ services:
 
   geoloc-config-service:
     build: ./config-service
+    context: .       # project root, where parent pom.xml exists
+
     container_name: geoloc-config-service
     ports:
       - '8888:8888'
@@ -15,6 +17,8 @@ services:
 
   geoloc-discovery-service:
     build: ./discovery-service
+    context: .       # project root, where parent pom.xml exists
+
     container_name: geoloc-discovery-service
     ports:
       - '8761:8761'
@@ -33,6 +37,8 @@ services:
 
   geoloc-position-service:
     build: ./position-service
+    context: .       # project root, where parent pom.xml exists
+
     container_name: geoloc-position-service
     ports:
       - '8092:8092'
@@ -54,6 +60,8 @@ services:
 
   geoloc-gateway-service:
     build: ./gateway-service
+    context: .       # project root, where parent pom.xml exists
+
     container_name: geoloc-gateway-service
     ports:
       - '8222:8222'
