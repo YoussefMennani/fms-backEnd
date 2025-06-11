@@ -69,3 +69,7 @@ services:
         condition: service_healthy
     networks:
       - geoloc-network
+
+networks:
+  geoloc-network:
+    driver: bridge
