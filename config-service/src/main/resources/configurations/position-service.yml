@@ -6,8 +6,10 @@ spring:
         type-key: null
 
 
+#  kafka:
+#    bootstrap-servers: 45.10.162.39:9092  # Replace with your Kafka broker's IP or hostname
   kafka:
-    bootstrap-servers: 45.10.162.39:9092  # Replace with your Kafka broker's IP or hostname
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:45.10.162.39:9092}
 
     consumer:
       group-id: gps-consumer-group  # Consumer group ID
