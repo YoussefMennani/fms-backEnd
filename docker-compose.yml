@@ -72,4 +72,4 @@ services:
 
 networks:
   geoloc-network:
-    driver: bridge
+    external: true
