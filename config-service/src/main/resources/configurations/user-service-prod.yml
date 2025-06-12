@@ -3,7 +3,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: https://45.10.162.39:8443/realms/fleet-management-system
+#          issuer-uri: https://45.10.162.39:8443/realms/fleet-management-system
+          jwk-set-uri: https://45.10.162.39:8443/realms/fleet-management-system/protocol/openid-connect/certs
 
   data:
     mongodb:
