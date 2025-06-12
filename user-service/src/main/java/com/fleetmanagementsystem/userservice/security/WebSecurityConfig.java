@@ -18,14 +18,20 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
+//                .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
+//                        //.requestMatchers(HttpMethod.GET, "/api/movies", "/api/movies/**").permitAll()
+////                        .requestMatchers(HttpMethod.GET, "/actuator/**").permitAll()
+////                        .requestMatchers("/api/movies/*/comments").hasAnyRole(MOVIES_ADMIN, MOVIES_USER)
+////                        .requestMatchers("/api/movies", "/api/movies/**").hasRole(MOVIES_ADMIN)
+//                        .requestMatchers("/api/userextras/me").hasAnyRole(ROLE_ADMIN, ROLE_USER,ROLE_MANAGER,ROLE_AGENT)
+//                        .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**").permitAll()
+//                        .anyRequest().authenticated())
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                        //.requestMatchers(HttpMethod.GET, "/api/movies", "/api/movies/**").permitAll()
-//                        .requestMatchers(HttpMethod.GET, "/actuator/**").permitAll()
-//                        .requestMatchers("/api/movies/*/comments").hasAnyRole(MOVIES_ADMIN, MOVIES_USER)
-//                        .requestMatchers("/api/movies", "/api/movies/**").hasRole(MOVIES_ADMIN)
-                        .requestMatchers("/api/userextras/me").hasAnyRole(ROLE_ADMIN, ROLE_USER,ROLE_MANAGER,ROLE_AGENT)
-                        .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**").permitAll()
-                        .anyRequest().authenticated())
+                        .requestMatchers("/api/userextras/me").permitAll()  // allow everyone to access this endpoint
+                        // other rules...
+                        .anyRequest().authenticated()
+                )
+
                 .oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(
                         jwt -> jwt.jwtAuthenticationConverter(jwtAuthConverter)))
                 .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
