@@ -14,3 +14,10 @@ spring:
         jwt:
           issuer-uri: http://localhost:9090/realms/fleet-management-system
           jwk-set-uri: http://localhost:9090/realms/fleet-management-system/protocol/openid-connect/certs
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

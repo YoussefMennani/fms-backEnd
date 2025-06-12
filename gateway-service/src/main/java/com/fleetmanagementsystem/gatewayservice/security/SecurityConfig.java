@@ -27,7 +27,7 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeExchange()
-                .pathMatchers("/eureka/**").permitAll()
+                .pathMatchers("/eureka/**", "/actuator/health","/actuator/health/**").permitAll()
                 .anyExchange().authenticated()
                 .and()
                 .oauth2ResourceServer()
@@ -55,7 +55,9 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(List.of("http://localhost:5173")); // Specify allowed origins
+//        corsConfiguration.setAllowedOrigins(List.of("http://localhost:5173")); // Specify allowed origins
+
+        corsConfiguration.setAllowedOrigins(List.of("*")); // Specify allowed origins
         corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Allowed HTTP methods
         corsConfiguration.setAllowedHeaders(List.of("*")); // Allow all headers
         corsConfiguration.setAllowCredentials(true); // Allow cookies/auth headers

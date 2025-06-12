@@ -62,6 +62,8 @@ jwt:
       resource-id: fleet-management-system
       principal-attribute: preferred_username
 
+
+
 app:
   cors:
     allowed-origins: http://localhost:5173
