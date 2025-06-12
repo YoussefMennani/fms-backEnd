@@ -19,7 +19,7 @@ public class StripeApiPaymentGateway {
 
     private final PaymentRepository paymentRepository;
 
-    @Value("${stripe.api.secret-key}")
+//    @Value("${stripe.api.secret-key}")
     private String secretKey;
 
     public StripeApiPaymentGateway(PaymentRepository paymentRepository) {

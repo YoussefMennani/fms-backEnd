@@ -1,0 +1,19 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://45.10.162.39:8080/realms/fleet-management-system
+
+  data:
+    mongodb:
+      uri: mongodb://45.10.162.39:27017/GeoTrackDB # injected from environment
+
+app:
+  cors:
+    allowed-origins:
+      - https://45.10.162.39
+
+logging:
+  level:
+    org.springframework.security: INFO

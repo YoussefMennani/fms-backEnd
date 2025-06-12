@@ -1,0 +1,21 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/fleet-management-system
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/GeoTrackDB
+
+app:
+  cors:
+    allowed-origins:
+      - http://localhost:5173
+      - http://localhost:8091
+      - http://localhost:8097
+
+logging:
+  level:
+    org.springframework.security: DEBUG

@@ -62,6 +62,11 @@ services:
     environment:
       - CONFIG_SERVICE_URL=http://geoloc-config-service:8888
       - EUREKA_SERVICE_URL=http://geoloc-discovery-service:8761/eureka
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8222/actuator/health" ]
+      interval: 10s
+      retries: 4
+
     depends_on:
       geoloc-config-service:
         condition: service_healthy
@@ -70,6 +75,48 @@ services:
     networks:
       - geoloc-network
 
+
+  user-service:
+    build: ./user-service
+    container_name: geoloc-user-service
+    ports:
+      - '8093:8093'
+    expose:
+      - '8093'
+    environment:
+      - CONFIG_SERVICE_URL=http://geoloc-config-service:8888
+      - EUREKA_SERVICE_URL=http://geoloc-discovery-service:8761/eureka
+    depends_on:
+      geoloc-config-service:
+        condition: service_healthy
+      geoloc-discovery-service:
+        condition: service_healthy
+      geoloc-gateway-service:
+        condition: service_healthy
+    networks:
+      - geoloc-network
+
+
+  subscription-service:
+    build: ./subscription-service
+    container_name: geoloc-subscription-service
+    ports:
+      - '8089:8089'
+    expose:
+      - '8089'
+    environment:
+      - CONFIG_SERVICE_URL=http://geoloc-config-service:8888
+      - EUREKA_SERVICE_URL=http://geoloc-discovery-service:8761/eureka
+    depends_on:
+      geoloc-config-service:
+        condition: service_healthy
+      geoloc-discovery-service:
+        condition: service_healthy
+      geoloc-gateway-service:
+        condition: service_healthy
+    networks:
+      - geoloc-network
+      -
 networks:
   geoloc-network:
     external: true

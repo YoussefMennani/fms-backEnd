@@ -5,3 +5,5 @@ spring:
   config:
     import: optional:configserver:http://localhost:8888
 
+  profiles:
+    active: prod  # or use an environment variable in Docker/CI
