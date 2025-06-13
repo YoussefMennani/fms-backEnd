@@ -27,6 +27,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -54,6 +55,7 @@ public class VehicleService {
 
 
     public List<VehicleResponse> getAllVehicles() {
+        List<VehicleResponse> vehicleResponseList = new ArrayList<>();
         try {
             // Extract the token from the security context
             JwtAuthenticationToken authentication = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
@@ -79,13 +81,15 @@ public class VehicleService {
                     .toList();
 
             // Map filtered vehicles to VehicleResponse
-            List<VehicleResponse> vehicleResponseList = filteredVehicleList.stream()
+            vehicleResponseList = filteredVehicleList.stream()
                     .map(vehicle -> vehicleMapper.toResponseVehicle(vehicle))
                     .toList();
 
-            return vehicleResponseList;
+//            return vehicleResponseList;
         }catch (Exception ex){
             System.out.println(ex.getMessage());
+        }finally {
+            return vehicleResponseList;
         }
 
     }
