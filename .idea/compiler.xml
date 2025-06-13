@@ -44,6 +44,8 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="ListnerJava" target="17" />
+      <module name="mqtt-subscriber-service" target="17" />
+      <module name="simulateurGPS" target="17" />
       <module name="vehicle-service" target="17" />
     </bytecodeTargetLevel>
   </component>
