@@ -23,6 +23,9 @@ app:
     allowed-origins:
       - "*"
 
+user-service:
+  base-url: http://geoloc-user-service:8093/api
+
 logging:
   level:
     org.springframework.security: INFO

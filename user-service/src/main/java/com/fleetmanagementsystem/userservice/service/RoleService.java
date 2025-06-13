@@ -39,6 +39,7 @@ public class RoleService {
         JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) principal;
         Jwt jwt = (Jwt) jwtAuthenticationToken.getPrincipal();
 
+        System.out.println(" ______jwt claims______"+jwt.getClaims());
         // Safely retrieve the "organization" claim
         String organization = jwt.getClaimAsString("organization");
 
