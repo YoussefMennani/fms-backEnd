@@ -1,6 +1,5 @@
 package com.fleetmanagementsystem.gatewayservice.security;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
@@ -18,12 +17,10 @@ import java.util.List;
 @EnableWebFluxSecurity
 public class SecurityConfig {
 
-    @Value("${security.oauth2.resourceserver.jwt.jwk-set-uri}")
-    private String jwkSetUri;
 
     @Bean
     public ReactiveJwtDecoder jwtDecoder() {
-        return NimbusReactiveJwtDecoder.withJwkSetUri(jwkSetUri).build();
+        return NimbusReactiveJwtDecoder.withJwkSetUri("https://45.10.162.39:8443/realms/fleet-management-system/protocol/openid-connect/certs").build();
     }
 
     @Bean

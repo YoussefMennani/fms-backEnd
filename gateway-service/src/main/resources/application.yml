@@ -15,13 +15,6 @@ spring:
 #          issuer-uri: http://localhost:9090/realms/fleet-management-system
 #          jwk-set-uri: http://localhost:9090/realms/fleet-management-system/protocol/openid-connect/certs
 
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri:  https://45.10.162.39:8443/realms/fleet-management-system
-          jwk-set-uri: https://45.10.162.39:8443/realms/fleet-management-system/protocol/openid-connect/certs
-          ssl-verification-disabled: true # <== attention, option non standard
 
   profiles:
     active: prod  # or use an environment variable in Docker/CI
