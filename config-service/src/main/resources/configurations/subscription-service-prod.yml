@@ -5,6 +5,9 @@ spring:
       mapping:
         type-key: null
 
+  services:
+    subscription: http://45.10.162.39:8089/api/v1/subscription
+
   security:
     oauth2:
       resourceserver:
