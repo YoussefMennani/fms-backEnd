@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class GatewayServiceApplication {
 
 	public static void main(String[] args) {
+		SSLValidationDisabler.disableSSLVerification();
+
 		SpringApplication.run(GatewayServiceApplication.class, args);
 	}
 
