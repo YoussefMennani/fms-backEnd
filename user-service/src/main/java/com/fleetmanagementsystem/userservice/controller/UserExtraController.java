@@ -80,10 +80,13 @@ public class UserExtraController {
 
             return ResponseEntity.ok(userExtra);
         } catch (AccessDeniedException e) {
+            System.out.println(e.getMessage());
             // Handle unauthorized access
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         } catch (Exception e) {
             // Handle other exceptions
+            System.out.println(e.getMessage());
+
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }

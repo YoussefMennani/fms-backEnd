@@ -116,6 +116,7 @@ public class SubscriptionService {
     public boolean isOrganizationAuthorized(String organizationId) {
         // Fetch the subscription by organization ID
 //        Subscription subscription = subscriptionRepository.findByOrganizationId(organizationId);
+        System.out.println(" _________servoce isOrganizationAuthorized_______ ");
 
         Date now = new Date();
         Subscription subscription =  subscriptionRepository.findActiveSubscription(organizationId, now);
