@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-
-@FeignClient(name = "subscription-service", url = "${app.services.subscription}")
+//http://localhost:8089/api/v1/subscription
+@FeignClient(name = "subscription-service", url = "http://45.10.162.39:8089/api/v1/subscription")
 public interface SubscriptionClient {
 
     @GetMapping("/isOrganizationAuthorized")

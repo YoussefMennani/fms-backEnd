@@ -4,6 +4,9 @@ jwt:
       resource-id: fleet-management-system
       principal-attribute: preferred_username
 
+  services:
+    subscription: http://localhost:8089/api/v1/subscription
+
 eureka:
   client:
     service-url:
