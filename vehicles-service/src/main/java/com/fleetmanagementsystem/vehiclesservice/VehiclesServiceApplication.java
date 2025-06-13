@@ -13,6 +13,7 @@ import org.springframework.data.mongodb.config.EnableMongoAuditing;
 public class VehiclesServiceApplication {
 
 	public static void main(String[] args) {
+		SSLValidationDisabler.disableSSLVerification();
 		SpringApplication.run(VehiclesServiceApplication.class, args);
 	}
 
