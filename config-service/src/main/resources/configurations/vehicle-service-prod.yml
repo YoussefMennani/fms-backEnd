@@ -13,7 +13,7 @@ spring:
           issuer-uri: https://45.10.162.39:8443/realms/fleet-management-system
 
 user-service:
-  base-url: https://geoloc-user-service.prod.com/api
+  base-url: http://geoloc-user-service:8093/api
 
 eureka:
   client:
