@@ -66,6 +66,7 @@ public class UserExtraController {
                 Organization organization = this.organizationsService.getRootOrganizationById(userExtra.getOrganization().getId());
                 System.out.println("__________organization____________ : "+organization);
                 boolean isOrganizationAuthorized = subscriptionClient.isOrganizationAuthorized(token, organization.getId());
+                System.out.println("__________isOrganizationAuthorized____________ : "+isOrganizationAuthorized);
 
                 if (!isOrganizationAuthorized) {
                     // If not authorized, throw an AccessDeniedException or return 403 Forbidden

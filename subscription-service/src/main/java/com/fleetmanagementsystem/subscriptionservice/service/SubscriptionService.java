@@ -125,6 +125,7 @@ public class SubscriptionService {
 
         List<Payment> paymentDetails = paymentRepository.findPaymentsBySubscriptionId(subscription.getId());
 
+        System.out.println(subscription+" ________________ "+paymentDetails);
 
         // Check if the subscription is enabled and the current date is within the start and end date
         return subscription.isEnabled() ||  (paymentDetails.size() >0 && paymentDetails.get(0).getStatus() == PaymentStatus.CONFIRMED);
