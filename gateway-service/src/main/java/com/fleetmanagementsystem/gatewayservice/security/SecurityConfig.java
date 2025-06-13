@@ -1,7 +1,11 @@
 package com.fleetmanagementsystem.gatewayservice.security;
 
+import io.netty.handler.ssl.SslContext;
+import io.netty.handler.ssl.SslContextBuilder;
+import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.oauth2.jwt.NimbusReactiveJwtDecoder;
@@ -10,6 +14,8 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsConfigurationSource;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.netty.http.client.HttpClient;
 
 import java.util.List;
 
@@ -17,11 +23,24 @@ import java.util.List;
 @EnableWebFluxSecurity
 public class SecurityConfig {
 
-
     @Bean
-    public ReactiveJwtDecoder jwtDecoder() {
-        //  VPS ENV
-        return NimbusReactiveJwtDecoder.withJwkSetUri("https://45.10.162.39:8443/realms/fleet-management-system/protocol/openid-connect/certs").build();
+    public ReactiveJwtDecoder jwtDecoder() throws Exception {
+
+        //        return NimbusReactiveJwtDecoder.withJwkSetUri("https://45.10.162.39:8443/realms/fleet-management-system/protocol/openid-connect/certs").build();
+        // Create insecure (trust-all) SSL context for Reactor Netty
+        SslContext sslContext = SslContextBuilder.forClient()
+                .trustManager(InsecureTrustManagerFactory.INSTANCE)
+                .build();
+
+        HttpClient httpClient = HttpClient.create().secure(spec -> spec.sslContext(sslContext));
+
+        WebClient webClient = WebClient.builder()
+                .clientConnector(new ReactorClientHttpConnector(httpClient))
+                .build();
+
+        return NimbusReactiveJwtDecoder.withJwkSetUri("https://45.10.162.39:8443/realms/fleet-management-system/protocol/openid-connect/certs")
+                .webClient(webClient)
+                .build();
     }
 
     @Bean
@@ -29,43 +48,27 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeExchange()
-                .pathMatchers("/eureka/**", "/actuator/health","/actuator/health/**").permitAll()
+                .pathMatchers("/eureka/**", "/actuator/health", "/actuator/health/**").permitAll()
                 .anyExchange().authenticated()
                 .and()
                 .oauth2ResourceServer()
                 .jwt();
 
-        // Attach CORS configuration
         http.cors().configurationSource(corsConfigurationSource());
 
         return http.build();
     }
 
-//    @Bean
-//    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
-//        http
-//                .csrf(ServerHttpSecurity.CsrfSpec::disable)
-//                .authorizeExchange(exchange -> exchange
-//                        .anyExchange().permitAll()  // Allow all requests without authentication
-//                )
-//                .cors(cors -> cors.configurationSource(corsConfigurationSource())); // Attach CORS config
-//
-//        return http.build();
-//    }
-
-
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-//        corsConfiguration.setAllowedOrigins(List.of("http://localhost:5173")); // Specify allowed origins
-
-        corsConfiguration.setAllowedOrigins(List.of("*")); // Specify allowed origins
-        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Allowed HTTP methods
-        corsConfiguration.setAllowedHeaders(List.of("*")); // Allow all headers
-        corsConfiguration.setAllowCredentials(true); // Allow cookies/auth headers
+        corsConfiguration.setAllowedOrigins(List.of("*"));
+        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        corsConfiguration.setAllowedHeaders(List.of("*"));
+        corsConfiguration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", corsConfiguration); // Apply to all routes
+        source.registerCorsConfiguration("/**", corsConfiguration);
         return source;
     }
 }
