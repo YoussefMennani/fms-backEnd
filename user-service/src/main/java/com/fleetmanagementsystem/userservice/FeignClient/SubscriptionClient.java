@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 //http://localhost:8089/api/v1/subscription
-@FeignClient(name = "subscription-service", url = "http://geoloc-subscription-service:8089/api/v1/subscription")
+// http://geoloc-subscription-service:8089/api/v1/subscription
+@FeignClient(name = "subscription-service", url = "${feign-client-subscription-service.base-url}")
 public interface SubscriptionClient {
 
     @GetMapping("/isOrganizationAuthorized")

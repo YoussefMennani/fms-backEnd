@@ -23,7 +23,8 @@ app:
     allowed-origins:
       - "*"
 
-
+feign-client-subscription-service:
+  base-url: http://geoloc-subscription-service:8089/api/v1/subscription
 
 
 
