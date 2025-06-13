@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@FeignClient(name = "user-service", url = "http://localhost:8093/api")
+//@FeignClient(name = "user-service", url = "http://localhost:8093/api")
+@FeignClient(name = "user-service", url = "http://geoloc-user-service:8093/api")
 public interface OrganizationClient {
 
     @GetMapping("/organizations/roots")

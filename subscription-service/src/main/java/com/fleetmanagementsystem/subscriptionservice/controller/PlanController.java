@@ -97,7 +97,7 @@ public class PlanController {
 
     @GetMapping("/isOrganizationAuthorized")
     public boolean isOrganizationAuthorized(@RequestParam String organizationId) {
-        System.out.println("_________req arrived ______________");
+        System.out.println("_________req arrived ______________"+organizationId);
         return subscriptionService.isOrganizationAuthorized(organizationId);
     }
 
