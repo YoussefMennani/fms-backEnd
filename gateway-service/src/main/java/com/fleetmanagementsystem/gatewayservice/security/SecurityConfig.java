@@ -19,6 +19,15 @@ import reactor.netty.http.client.HttpClient;
 
 import java.util.List;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.server.WebFilter;
+import reactor.core.publisher.Mono;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.ReactiveSecurityContextHolder;
+
+
 @Configuration
 @EnableWebFluxSecurity
 public class SecurityConfig {
@@ -71,4 +80,28 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", corsConfiguration);
         return source;
     }
+
+
+
+    @Bean
+    public WebFilter logRequestsFilter() {
+        Logger logger = LoggerFactory.getLogger("RequestLogger");
+        return (exchange, chain) -> {
+            logger.info("Incoming request: {} {}", exchange.getRequest().getMethod(), exchange.getRequest().getURI());
+
+            return ReactiveSecurityContextHolder.getContext()
+                    .map(securityContext -> securityContext.getAuthentication())
+                    .doOnNext(auth -> {
+                        if (auth != null) {
+                            logger.info("Authentication: {} , Authorities: {}", auth.getName(), auth.getAuthorities());
+                        } else {
+                            logger.info("No Authentication present");
+                        }
+                    })
+                    .then(chain.filter(exchange));
+        };
+    }
+
+
+
 }
