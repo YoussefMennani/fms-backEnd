@@ -12,7 +12,10 @@ spring:
           # The Keycloak public key URI for JWT validation
           issuer-uri: https://45.10.162.39:8443/realms/fleet-management-system
 
-
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761/eureka}
 app:
   cors:
     allowed-origins:
