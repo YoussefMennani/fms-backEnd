@@ -54,30 +54,40 @@ public class VehicleService {
 
 
     public List<VehicleResponse> getAllVehicles() {
-        // Extract the token from the security context
-        JwtAuthenticationToken authentication = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-        String token = "Bearer " + authentication.getToken().getTokenValue();
-        List<Organization> organizationList = organizationClient.getRootOrganizations(token);
+        try {
+            // Extract the token from the security context
+            JwtAuthenticationToken authentication = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+            String token = "Bearer " + authentication.getToken().getTokenValue();
+            System.out.println(" ___________token_____________ : "+token);
 
-        // Extract organization IDs from the organizationList
-        Set<String> organizationIds = organizationList.stream()
-                .map(Organization::getId)
-                .collect(Collectors.toSet());
+            System.out.println("__________try to get Orgs__________ : "+token);
+            List<Organization> organizationList = organizationClient.getRootOrganizations(token);
 
-        // Fetch all vehicles
-        List<Vehicle> vehicleList = vehicleRepository.findAll();
+            System.out.println("__________try to get organizationList________________ : "+organizationList);
 
-        // Filter vehicles based on organization IDs
-        List<Vehicle> filteredVehicleList = vehicleList.stream()
-                .filter(vehicle -> organizationIds.contains(vehicle.getOrganization().getId()))
-                .toList();
+            // Extract organization IDs from the organizationList
+            Set<String> organizationIds = organizationList.stream()
+                    .map(Organization::getId)
+                    .collect(Collectors.toSet());
 
-        // Map filtered vehicles to VehicleResponse
-        List<VehicleResponse> vehicleResponseList = filteredVehicleList.stream()
-                .map(vehicle -> vehicleMapper.toResponseVehicle(vehicle))
-                .toList();
+            // Fetch all vehicles
+            List<Vehicle> vehicleList = vehicleRepository.findAll();
 
-        return vehicleResponseList;
+            // Filter vehicles based on organization IDs
+            List<Vehicle> filteredVehicleList = vehicleList.stream()
+                    .filter(vehicle -> organizationIds.contains(vehicle.getOrganization().getId()))
+                    .toList();
+
+            // Map filtered vehicles to VehicleResponse
+            List<VehicleResponse> vehicleResponseList = filteredVehicleList.stream()
+                    .map(vehicle -> vehicleMapper.toResponseVehicle(vehicle))
+                    .toList();
+
+            return vehicleResponseList;
+        }catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }
+
     }
 
     public List<VehicleResponse> getAllVehiclesByOrganization( String organization) {

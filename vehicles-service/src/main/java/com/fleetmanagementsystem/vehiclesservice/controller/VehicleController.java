@@ -79,6 +79,7 @@ public class VehicleController {
 
     @GetMapping()
     public ResponseEntity<CustomResponse<List<VehicleResponse>>> getAllVehicles(){
+        System.out.println(" Request arrive to ms vehicle");
         CustomResponse customResponse = new CustomResponse(
                 "Result retrieved successfully",
                 ResponseTypeEnum.SUCCESS,
