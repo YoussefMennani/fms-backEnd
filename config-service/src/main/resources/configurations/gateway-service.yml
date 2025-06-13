@@ -11,22 +11,24 @@ spring:
 
   cloud:
     gateway:
-      globalcors:
-        corsConfigurations:
-          '[/**]':
-            allowedOrigins:
-              - "*"  # Specify the frontend address explicitly
-            allowedHeaders:
-              - "*"
-            allowedMethods:
-              - GET
-              - POST
-              - PUT
-              - DELETE
-            allowCredentials: true  # If cookies or auth headers are needed
+#      globalcors:
+#        corsConfigurations:
+#          '[/**]':
+#            allowedOrigins:
+#              - "*"  # Specify the frontend address explicitly
+#            allowedHeaders:
+#              - "*"
+#            allowedMethods:
+#              - GET
+#              - POST
+#              - PUT
+#              - DELETE
+#            allowCredentials: true  # If cookies or auth headers are needed
+
       discovery:
         locator:
           enabled: true
+
       routes:
         - id: vehicle-service
           uri: lb:http://VEHICLE-SERVICE
