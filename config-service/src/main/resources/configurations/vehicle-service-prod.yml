@@ -12,6 +12,9 @@ spring:
           # The Keycloak public key URI for JWT validation
           issuer-uri: https://45.10.162.39:8443/realms/fleet-management-system
 
+user-service:
+  base-url: https://geoloc-user-service.prod.com/api
+
 eureka:
   client:
     service-url:

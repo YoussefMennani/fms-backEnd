@@ -11,7 +11,8 @@ spring:
         jwt:
           # The Keycloak public key URI for JWT validation
           issuer-uri: http://localhost:9090/realms/fleet-management-system
-
+user-service:
+  base-url: http://localhost:8093/api
 
 app:
   cors:

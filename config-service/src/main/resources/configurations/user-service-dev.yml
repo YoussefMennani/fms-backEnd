@@ -15,9 +15,8 @@ app:
       - http://localhost:5173
       - http://localhost:8091
       - http://localhost:8097
-      -
-user-service:
-  base-url: http://localhost:8093/api
+
+
 
 logging:
   level:
