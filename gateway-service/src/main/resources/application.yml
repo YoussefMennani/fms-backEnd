@@ -8,13 +8,15 @@ spring:
     allow-bean-definition-overriding: true
     web-application-type: reactive
 
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost:9090/realms/fleet-management-system
-          jwk-set-uri: http://localhost:9090/realms/fleet-management-system/protocol/openid-connect/certs
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: http://localhost:9090/realms/fleet-management-system
+#          jwk-set-uri: http://localhost:9090/realms/fleet-management-system/protocol/openid-connect/certs
 
+  profiles:
+    active: prod  # or use an environment variable in Docker/CI
 
 management:
   endpoints:

@@ -8,13 +8,14 @@ eureka:
 
 spring:
 
+
   cloud:
     gateway:
       globalcors:
         corsConfigurations:
           '[/**]':
             allowedOrigins:
-              - "http://localhost:5173"  # Specify the frontend address explicitly
+              - "*"  # Specify the frontend address explicitly
             allowedHeaders:
               - "*"
             allowedMethods:
@@ -66,7 +67,7 @@ jwt:
 
 app:
   cors:
-    allowed-origins: http://localhost:5173
+    allowed-origins: "*"
 
 logging:
   level:
