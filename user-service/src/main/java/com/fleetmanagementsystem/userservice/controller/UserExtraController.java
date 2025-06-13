@@ -60,7 +60,11 @@ public class UserExtraController {
 
             if (!isSuperAdmin) {
                 // Get the organization and check if the user is authorized
+                System.out.println("_________Other Role________");
+                System.out.println("_________ Org ID ________"+userExtra.getOrganization().getId());
+
                 Organization organization = this.organizationsService.getRootOrganizationById(userExtra.getOrganization().getId());
+                System.out.println("__________organization____________ : "+organization);
                 boolean isOrganizationAuthorized = subscriptionClient.isOrganizationAuthorized(token, organization.getId());
 
                 if (!isOrganizationAuthorized) {
