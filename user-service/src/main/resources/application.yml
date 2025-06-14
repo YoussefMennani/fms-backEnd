@@ -7,11 +7,11 @@ spring:
   profiles:
     active: prod  # or use an environment variable in Docker/CI
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
 
 #
 #        | Environment | What to set                              | What config gets loaded |

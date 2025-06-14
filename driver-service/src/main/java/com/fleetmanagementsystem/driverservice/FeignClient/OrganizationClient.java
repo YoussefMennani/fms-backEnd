@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.util.List;
 
-@FeignClient(name = "user-service", url = "http://localhost:8093/api/organizations")
+@FeignClient(name = "user-service", url = "${feign-client-user-service.base-url}")
 public interface OrganizationClient {
 
     @GetMapping("/roots")

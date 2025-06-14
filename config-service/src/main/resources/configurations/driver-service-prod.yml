@@ -1,0 +1,31 @@
+#spring:
+#  data:
+#    mongodb:
+#      uri: mongodb://localhost:27017/GeoTrackDB
+#      mapping:
+#        type-key: null
+#server:
+#  port: 8097
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://45.10.162.39:8443/realms/fleet-management-system
+
+  data:
+    mongodb:
+      uri: mongodb://45.10.162.39:27017/GeoTrackDB
+      mapping:
+        type-key: null
+
+feign-client-user-service:
+  base-url: http://geoloc-user-service:8093/api/organizations
+
+app:
+  cors:
+    allowed-origins:
+      - "*"
+
+
