@@ -98,29 +98,29 @@ spring:
           uri: lb://VEHICLE-SERVICE
           predicates:
             - Path=/api/v1/vehicles/**
-          filters:
-            - RewritePath=/api/v1/vehicles/(?<remaining>.*), /$\{remaining}
+#          filters:
+#            - RewritePath=/api/v1/vehicles/(?<remaining>.*), /$\{remaining}
 
         - id: tracker-service
           uri: lb://TRACKER-SERVICE
           predicates:
             - Path=/api/v1/trackers/**
-          filters:
-            - RewritePath=/api/v1/trackers/(?<remaining>.*), /$\{remaining}
+#          filters:
+#            - RewritePath=/api/v1/trackers/(?<remaining>.*), /$\{remaining}
 
         - id: driver-service
           uri: lb://DRIVER-SERVICE
           predicates:
             - Path=/api/v1/drivers/**
-          filters:
-            - RewritePath=/api/v1/drivers/(?<remaining>.*), /$\{remaining}
+#          filters:
+#            - RewritePath=/api/v1/drivers/(?<remaining>.*), /$\{remaining}
 
         - id: position-service
           uri: lb://POSITION-SERVICE
           predicates:
             - Path=/api/v1/positions/**
-          filters:
-            - RewritePath=/api/v1/positions/(?<remaining>.*), /$\{remaining}
+#          filters:
+#            - RewritePath=/api/v1/positions/(?<remaining>.*), /$\{remaining}
 
         - id: minio-service
           uri: lb://MINIO-SERVICE
@@ -131,15 +131,15 @@ spring:
           uri: lb://USER-SERVICE
           predicates:
             - Path=/api/userextras/**
-          filters:
-            - RewritePath=/api/userextras/(?<remaining>.*), /$\{remaining}
+#          filters:
+#            - RewritePath=/api/userextras/(?<remaining>.*), /$\{remaining}
 
         - id: subscription-service
           uri: lb://SUBSCRIPTION-SERVICE
           predicates:
             - Path=/api/v1/{segment:subscription|payment}/**
-          filters:
-            - RewritePath=/api/v1/(?<segment>subscription|payment)/(?<remaining>.*), /$\{remaining}
+#          filters:
+#            - RewritePath=/api/v1/(?<segment>subscription|payment)/(?<remaining>.*), /$\{remaining}
 
 logging:
   level:
