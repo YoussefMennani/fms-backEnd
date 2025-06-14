@@ -1,0 +1,36 @@
+#spring:
+#  data:
+#    mongodb:
+#      uri: mongodb://localhost:27017/GeoTrackDB
+#      mapping:
+#        type-key: null
+#server:
+#  port: 8090
+
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://45.10.162.39:27017/GeoTrackDB
+      mapping:
+        type-key: null
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # The Keycloak public key URI for JWT validation
+          issuer-uri: https://45.10.162.39:8443/realms/fleet-management-system
+
+
+feign-client-tracker-service:
+  base-url: http://45.10.162.39:8090/api/v1/trackers
+
+user-service:
+  base-url: http://geoloc-user-service:8093/api
+
+app:
+  cors:
+    allowed-origins:
+      - "*"
+

@@ -138,6 +138,26 @@ services:
     networks:
       - geoloc-network
 
+  tracker-service:
+    build: ./tracker-service
+    container_name: geoloc-tracker-service
+    ports:
+      - '8090:8090'
+    expose:
+      - '8090'
+    environment:
+      - CONFIG_SERVICE_URL=http://geoloc-config-service:8888
+      - EUREKA_SERVICE_URL=http://geoloc-discovery-service:8761/eureka
+    depends_on:
+      geoloc-config-service:
+        condition: service_healthy
+      geoloc-discovery-service:
+        condition: service_healthy
+      geoloc-gateway-service:
+        condition: service_healthy
+    networks:
+      - geoloc-network
+
 networks:
   geoloc-network:
     external: true
