@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(name = "position-service", url = "http://localhost:8092/api/v1/positions")
+//url = "http://localhost:8092/api/v1/positions "
+@FeignClient(name = "position-service",   url="${feign-client-position-service.base-url}"
+)
 public interface PositionServiceFeignClient  {
 
     @GetMapping("/findPositions")

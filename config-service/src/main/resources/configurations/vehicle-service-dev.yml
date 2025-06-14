@@ -14,6 +14,9 @@ spring:
 user-service:
   base-url: http://localhost:8093/api/organizations
 
+feign-client-position-service:
+  base-url: http://localhost:8092/api/v1/positions
+
 app:
   cors:
     allowed-origins: http://localhost:5173
