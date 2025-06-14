@@ -177,7 +177,8 @@ services:
         condition: service_healthy
     networks:
       - geoloc-network
-      -
+
+  
 networks:
   geoloc-network:
     external: true
