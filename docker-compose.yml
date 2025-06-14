@@ -178,7 +178,7 @@ services:
     networks:
       - geoloc-network
 
-  
+
 networks:
   geoloc-network:
     external: true

@@ -15,10 +15,7 @@ spring:
 user-service:
   base-url: http://geoloc-user-service:8093/api
 
-eureka:
-  client:
-    service-url:
-      defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761/eureka}
+
 app:
   cors:
     allowed-origins:
