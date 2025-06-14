@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 public class TrackerServiceApplication {
 
 	public static void main(String[] args) {
+		SSLValidationDisabler.disableSSLVerification();
+
 		SpringApplication.run(TrackerServiceApplication.class, args);
 	}
 
