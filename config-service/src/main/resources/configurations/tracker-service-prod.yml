@@ -27,7 +27,7 @@ feign-client-tracker-service:
   base-url: http://45.10.162.39:8090/api/v1/trackers
 
 user-service:
-  base-url: http://geoloc-user-service:8093/api
+  base-url: http://geoloc-user-service:8093/api/organizations
 
 app:
   cors:
