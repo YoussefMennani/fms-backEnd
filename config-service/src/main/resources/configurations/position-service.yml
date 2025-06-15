@@ -1,15 +1,7 @@
 spring:
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/GeoPositionDB
-      mapping:
-        type-key: null
 
-
-#  kafka:
-#    bootstrap-servers: 45.10.162.39:9092  # Replace with your Kafka broker's IP or hostname
   kafka:
-    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:45.10.162.39:9092}
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:http://localhost:9092}
 
     consumer:
       group-id: gps-consumer-group  # Consumer group ID
@@ -28,11 +20,6 @@ eureka:
     service-url:
       defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761/eureka}
 
-
-keycloak:
-  token-uri: http://localhost:9090/realms/fleet-management-system/protocol/openid-connect/token
-  client-id: listener-client
-  client-secret: NIqu6THXwIVhiIRhUQjlblDUkXRVYzUu
 
 server:
   port: 8092

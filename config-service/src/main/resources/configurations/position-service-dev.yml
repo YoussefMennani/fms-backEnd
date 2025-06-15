@@ -1,0 +1,12 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/GeoPositionDB
+      mapping:
+        type-key: null
+
+
+keycloak:
+  token-uri: http://localhost:8443/realms/fleet-management-system/protocol/openid-connect/token
+  client-id: listener-client
+  client-secret: NIqu6THXwIVhiIRhUQjlblDUkXRVYzUu
