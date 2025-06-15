@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://45.10.162.39:27017/GeoTrackDB
+      uri: mongodb://45.10.162.39:21212/GeoTrackDB
       mapping:
         type-key: null
 
