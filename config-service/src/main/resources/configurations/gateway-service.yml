@@ -131,6 +131,12 @@ spring:
           uri: lb://USER-SERVICE
           predicates:
             - Path=/api/userextras/**
+
+        - id: organizations
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/organizations/**
+
 #          filters:
 #            - RewritePath=/api/userextras/(?<remaining>.*), /$\{remaining}
 
